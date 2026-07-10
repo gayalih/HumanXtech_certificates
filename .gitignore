@@ -7,10 +7,6 @@ __pycache__/
 venv/
 env/
 
-# Generated certificate PDFs
-certificates/*.pdf
-*.pdf
-
 # Local OS/editor files
 .DS_Store
 Thumbs.db
