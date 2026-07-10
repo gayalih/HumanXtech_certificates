@@ -1,0 +1,17 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Generated certificate PDFs
+certificates/*.pdf
+*.pdf
+
+# Local OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
