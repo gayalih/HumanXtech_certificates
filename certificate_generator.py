@@ -39,7 +39,7 @@ CEO_TITLE   = "Chief Executive Officer"
 HOD_TITLE   = "Head of the Department"
 HOD_DEPT    = "Dept. of Computer Science & Engineering"
 COORD_TITLE = "MBA in IT Coordinator"
-VERIFY_URL  = "humanxtech.lk"
+VERIFY_URL  = "humanxtech.cse.uom.lk"
 ORG_LINES   = [
     "Department of Computer Science & Engineering",
     "Faculty of Engineering",
@@ -449,28 +449,28 @@ def draw_certificate(c, row, F):
     # Cert ID (bottom-left)
     draw_cert_id_box(c, 24*mm, 23*mm, cid, F)
 
-    # Two signatures (bottom-centre): HoD (with signature image) + MBA in IT Coordinator (blank, to sign)
+    # Three signatures (bottom-centre), evenly spaced across the footer.
     sig_y_line = 32*mm
-    sig_gap    = 48*mm
-    left_cx    = W/2 - sig_gap/2
-    right_cx   = W/2 + sig_gap/2
+    sig_gap    = 52*mm
+    sig_centres = [W/2 - sig_gap, W/2, W/2 + sig_gap]
 
     # HoD signature image (if present) sits just above the signature line
-    if os.path.exists(HOD_SIGNATURE):
-        sig_img = ImageReader(HOD_SIGNATURE)
-        siw, sih = sig_img.getSize()
-        sig_h_pt = 16*mm
-        sig_w_pt = siw * (sig_h_pt / sih)
-        c.drawImage(sig_img, left_cx - sig_w_pt/2, sig_y_line + 1,
-                    sig_w_pt, sig_h_pt, mask='auto')
+    # if os.path.exists(HOD_SIGNATURE):
+    #     sig_img = ImageReader(HOD_SIGNATURE)
+    #     siw, sih = sig_img.getSize()
+    #     sig_h_pt = 16*mm
+    #     sig_w_pt = siw * (sig_h_pt / sih)
+    #     c.drawImage(sig_img, sig_centres[0] - sig_w_pt/2, sig_y_line + 1,
+    #                 sig_w_pt, sig_h_pt, mask='auto')
 
     for cx, title, subtitle in [
-        (left_cx,  HOD_TITLE,   HOD_DEPT),
-        (right_cx, COORD_TITLE, EVENT_NAME),
+        (sig_centres[0], "Prof. Shantha Fernando", "Head of the Department"),
+        (sig_centres[1], "Dr. Adeesha Wijayasiri", "MBA in IT Coordinator"),
+        (sig_centres[2], "Janaka Kumarasinghe", "Conference Organizer"),
     ]:
         c.setStrokeColor(colors.Color(0.482, 0.424, 0.961, alpha=0.45))
         c.setLineWidth(0.5)
-        c.line(cx - 18*mm, sig_y_line, cx + 18*mm, sig_y_line)
+        c.line(cx - 16*mm, sig_y_line, cx + 16*mm, sig_y_line)
         c.setFont(F['serif-bold'], 8.2)
         c.setFillColor(C_WHITE)
         c.drawCentredString(cx, sig_y_line - 9.5, title)
